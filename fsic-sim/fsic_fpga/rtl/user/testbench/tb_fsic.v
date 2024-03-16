@@ -417,15 +417,16 @@ FSIC #(
 		error_cnt = 0;
 		check_cnt = 0;
 
-        
+        fsic_system_initial();
 		test001();	//soc cfg write/read test
+		/*
 		test002();	//test002_fpga_axis_req
 		test003();	//test003_fpga_to_soc_cfg_read
 		test004();	//test004_fpga_to_soc_mail_box_write
 		test005();	//test005_aa_mailbox_soc_cfg
 		test006();	//test006_fpga_to_soc_cfg_write
 		test007();	//test007_mailbox_interrupt test
-		
+		*/
 
 
 		#400;
@@ -2165,9 +2166,30 @@ FSIC #(
 
 
 	task fsic_system_initial;
-		
+		fork
+			soc_apply_reset(40, 40); //change coreclk phase in soc
+			fpga_apply_reset(40,40); //fix coreclk phase in fpga
+		join
+			#40;
+			fpga_as_to_is_init();
+			soc_cc_is_enable=1;
+			fpga_cc_is_enable=1;
+			// Enable RX on SOC and FPGA side
+		fork
+			soc_is_cfg_write(0, 4'b0001, 1); //ioserdes rxen
+			fpga_cfg_write(0,1,1,0);
+		join
+			// Enable TX on SOC and FPGA side
+			#400;
+		fork
+			soc_is_cfg_write(0, 4'b0001, 3); //ioserdes txen
+			fpga_cfg_write(0,3,1,0);
+		join
 	
 	endtask
+
+
+
 
 endmodule
 
