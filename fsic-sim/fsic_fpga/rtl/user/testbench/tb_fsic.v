@@ -417,16 +417,15 @@ FSIC #(
 		error_cnt = 0;
 		check_cnt = 0;
 
-        fsic_system_initial();
+        
 		test001();	//soc cfg write/read test
-		/*
 		test002();	//test002_fpga_axis_req
 		test003();	//test003_fpga_to_soc_cfg_read
 		test004();	//test004_fpga_to_soc_mail_box_write
 		test005();	//test005_aa_mailbox_soc_cfg
 		test006();	//test006_fpga_to_soc_cfg_write
 		test007();	//test007_mailbox_interrupt test
-		*/
+		
 
 
 		#400;
