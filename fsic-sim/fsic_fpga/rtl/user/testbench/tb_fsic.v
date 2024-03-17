@@ -2244,10 +2244,9 @@ FSIC #(
 
 	task test_fir;
 		soc_abs_write(32'h3000_5000,1,1);
+		fpga_cfg_write(0,1,1,0);
 		#400;
 		soc_abs_read(32'h3000_5000,3);
-		fpga_cfg_write(0,1,1,0);
-
 	endtask
 
 endmodule
