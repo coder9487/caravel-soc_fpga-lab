@@ -2226,7 +2226,7 @@ FSIC #(
 			wbs_adr <= address;			
 			
 			wbs_wdata <= data;
-			
+
 			wbs_sel <= sel;
 			wbs_cyc <= 1'b1;
 			wbs_stb <= 1'b1;
@@ -2244,7 +2244,8 @@ FSIC #(
 
 	task test_fir;
 		soc_abs_write(32'h3000_5000,1,1);
-		soc_abs_read();
+		#400;
+		soc_abs_read(32'h3000_5000,3);
 		fpga_cfg_write(0,1,1,0);
 
 	endtask
