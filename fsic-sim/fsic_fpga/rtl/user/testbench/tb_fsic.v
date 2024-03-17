@@ -42,6 +42,11 @@ module tb_fsic #( parameter BITS=32,
 	)
 (
 );
+initial begin
+	$dumpfile("FSIC_FIR.vcd");
+	$dumpvars(0, tb_fsic);
+end
+
 `ifdef USE_EDGEDETECT_IP
 		localparam CoreClkPhaseLoop    = 1;
                 localparam TST_TOTAL_FRAME_NUM = 2;
@@ -397,10 +402,7 @@ FSIC #(
 	assign mprj_io[TXD_OFFSET +: pSERIALIO_WIDTH] = io_out[TXD_OFFSET +: pSERIALIO_WIDTH];
 	
 
-	initial begin
-		$dumpfile("FSIC_FIR.vcd");
-		$dumpvars(0, tb_fsic);
-	end
+
 
     initial begin
 		ioclk_source=0;
