@@ -417,9 +417,9 @@ FSIC #(
 		error_cnt = 0;
 		check_cnt = 0;
 
-        
+        fsic_system_initial();
 		test001();	//soc cfg write/read test
-		
+		test_fir();
 		/*
 		test002();	//test002_fpga_axis_req
 		test003();	//test003_fpga_to_soc_cfg_read
@@ -2190,7 +2190,64 @@ FSIC #(
 	endtask
 
 
+	task soc_abs_read;
+		input [31:0] address;		//4K range
+		input [3:0] sel;
+		
+		begin
+			@ (posedge soc_coreclk);		
+			wbs_adr <= address;			
+			
+			
+			wbs_sel <= sel;
+			wbs_cyc <= 1'b1;
+			wbs_stb <= 1'b1;
+			wbs_we <= 1'b0;	
 
+			@(posedge soc_coreclk);
+			while(wbs_ack==0) begin
+				@(posedge soc_coreclk);
+			end
+
+			$display($time, "=> soc_abs_read : wbs_adr=%x, wbs_sel=%b", wbs_adr, wbs_sel); 
+			//#1;		//add delay to make sure cfg_read_data_captured get the correct data 
+			@(soc_cfg_read_event);
+			$display($time, "=> soc_abs_read : got soc_cfg_read_event"); 
+		end
+	endtask
+
+	task soc_abs_write;
+		input [31:0] address;		//4K range
+		input [3:0] sel;
+		input [31:0] data;
+		
+		begin
+			@ (posedge soc_coreclk);		
+			wbs_adr <= address;			
+			
+			wbs_wdata <= data;
+			
+			wbs_sel <= sel;
+			wbs_cyc <= 1'b1;
+			wbs_stb <= 1'b1;
+			wbs_we <= 1'b1;	
+
+			@(posedge soc_coreclk);
+			while(wbs_ack==0) begin
+				@(posedge soc_coreclk);
+			end
+
+			$display($time, "=> soc_abs_write : wbs_adr=%x, wbs_sel=%b, wbs_wdata=%x", wbs_adr, wbs_sel, wbs_wdata); 
+		end
+	endtask
+
+
+	task test_fir;
+		soc_abs_write(32'h3000_5000,1,1);
+		soc_abs_read();
+		fpga_cfg_write(0,1,1,0);
+
+	endtask
 
 endmodule
 
