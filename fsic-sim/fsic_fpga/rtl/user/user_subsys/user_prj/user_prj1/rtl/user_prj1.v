@@ -53,7 +53,7 @@ module USER_PRJ1 #( parameter pUSER_PROJECT_SIDEBAND_WIDTH   = 5,
   input  wire                        uck2_rst_n
 );
 
-
+/*
 assign awready       = 1'b0;
 assign arready       = 1'b0;
 assign wready        = 1'b0;
@@ -72,7 +72,7 @@ assign sm_tlast      = 1'b0;
 assign low__pri_irq  = 1'b0;
 assign High_pri_req  = 1'b0;
 assign la_data_o     = 24'b0;
-
+*/
 
 wire                     tap_WE_merge;
 wire                     tap_RE;
