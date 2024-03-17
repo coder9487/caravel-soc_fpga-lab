@@ -396,6 +396,12 @@ FSIC #(
 	assign mprj_io[TXCLK_OFFSET] = io_out[TXCLK_OFFSET];
 	assign mprj_io[TXD_OFFSET +: pSERIALIO_WIDTH] = io_out[TXD_OFFSET +: pSERIALIO_WIDTH];
 	
+
+	initial begin
+		$dumpfile("FSIC_FIR.vcd");
+		$dumpvars(0, tb_fsic);
+	end
+
     initial begin
 		ioclk_source=0;
         soc_resetb = 0;
