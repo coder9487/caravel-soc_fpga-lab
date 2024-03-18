@@ -3,8 +3,8 @@
 # SW Build 4029153 on Fri Oct 13 20:14:34 MDT 2023
 # IP Build 4028589 on Sat Oct 14 00:45:43 MDT 2023
 # SharedData Build 4025554 on Tue Oct 10 17:18:54 MDT 2023
-# Start of session at: Mon Mar 18 15:39:22 2024
-# Process ID: 7416
+# Start of session at: Mon Mar 18 16:08:57 2024
+# Process ID: 4408
 # Current directory: C:/Users/soyuz/Documents/caravel-soc_fpga-lab/fsic-sim/fsic_fpga/rtl/user/testbench/tc
 # Command line: xsim.exe -mode tcl -source {xsim.dir/tb_fsic_xelab/xsim_script.tcl}
 # Log file: C:/Users/soyuz/Documents/caravel-soc_fpga-lab/fsic-sim/fsic_fpga/rtl/user/testbench/tc/xsim.log
@@ -48,20 +48,83 @@ source log_wave.tcl
                  425=> soc_is_cfg_write : wbs_adr=30003000, wbs_sel=0001, wbs_wdata=00000001
                  865=> fpga_cfg_write : fpga_axi_awaddr=0000, fpga_axi_awvalid=1, fpga_axi_awready=1, fpga_axi_wdata=00000003, axi_wstrb=1, fpga_axi_wvalid=1, fpga_axi_wready=1
                 1025=> soc_is_cfg_write : wbs_adr=30003000, wbs_sel=0001, wbs_wdata=00000003
-                1065=> fpga_cfg_write : fpga_axi_awaddr=0000, fpga_axi_awvalid=1, fpga_axi_awready=1, fpga_axi_wdata=00000001, axi_wstrb=1, fpga_axi_wvalid=1, fpga_axi_wready=1
-                1305=> soc_abs_write : wbs_adr=30005000, wbs_sel=0001, wbs_wdata=00000002
-                1905=> soc_abs_read : wbs_adr=30005000, wbs_sel=0001
-                1905=> soc wishbone read data result : send soc_cfg_read_event
-                1905=> soc_abs_read : got soc_cfg_read_event
-                1945=> fpga_cfg_write : fpga_axi_awaddr=0000, fpga_axi_awvalid=1, fpga_axi_awready=1, fpga_axi_wdata=00000003, axi_wstrb=1, fpga_axi_wvalid=1, fpga_axi_wready=1
-Get data is 00000002 and Golden is 00000002
+test001: soc cfg write/read test
+                1165=> soc POR Assert
+                1205=> soc POR De-Assert
+                1285=> fpga POR Assert
+                1285=> fpga reset Assert
+                1325=> fpga POR De-Assert
+                1365=> fpga reset De-Assert
+test001_is_soc_cfg: soc cfg read/write test
+                1585=> soc_is_cfg_write : wbs_adr=30003000, wbs_sel=0001, wbs_wdata=00000001
+                1825=> soc_is_cfg_read : wbs_adr=30003000, wbs_sel=1111
+                1825=> soc wishbone read data result : send soc_cfg_read_event
+                1825=> soc_is_cfg_read : got soc_cfg_read_event
+                1825=> test001_is_soc_cfg [PASS] cfg_read_data_expect_value=00000001, cfg_read_data_captured=00000001
+-----------------
+                2065=> soc_is_cfg_write : wbs_adr=30003000, wbs_sel=0001, wbs_wdata=00000003
+                2305=> soc_is_cfg_read : wbs_adr=30003000, wbs_sel=1111
+                2305=> soc wishbone read data result : send soc_cfg_read_event
+                2305=> soc_is_cfg_read : got soc_cfg_read_event
+                2305=> test001_is_soc_cfg [PASS] cfg_read_data_expect_value=00000003, cfg_read_data_captured=00000003
+-----------------
+test001_is_soc_cfg: soc cfg read/write test - end
+--------------------------------------------------------------------
+test001_aa_internal_soc_cfg: AA internal register read/write test - start
+                2705=> soc_aa_cfg_write : wbs_adr=30002100, wbs_sel=1111, wbs_wdata=00000001
+                3305=> soc_aa_cfg_read : wbs_adr=30002100, wbs_sel=1111
+                3305=> soc wishbone read data result : send soc_cfg_read_event
+                3305=> soc_aa_cfg_read : got soc_cfg_read_event
+                3305=> test001_aa_internal_soc_cfg [PASS] cfg_read_data_expect_value=00000001, cfg_read_data_captured=00000001
+-----------------
+                3625=> soc_aa_cfg_write : wbs_adr=30002104, wbs_sel=1111, wbs_wdata=00000000
+                4225=> soc_aa_cfg_read : wbs_adr=30002104, wbs_sel=1111
+                4225=> soc wishbone read data result : send soc_cfg_read_event
+                4225=> soc_aa_cfg_read : got soc_cfg_read_event
+                4225=> test001_aa_internal_soc_cfg [PASS] cfg_read_data_expect_value=00000000, cfg_read_data_captured=00000000
+-----------------
+test001_aa_internal_soc_cfg: AA Mail Box read/write test - end
+--------------------------------------------------------------------
+test001_up_soc_cfg: soc cfg read/write test
+                4545=> soc_up_cfg_write : wbs_adr=30000000, wbs_sel=0001, wbs_wdata=00000001
+                4825=> soc_up_cfg_read : wbs_adr=30000000, wbs_sel=0001
+                4825=> soc wishbone read data result : send soc_cfg_read_event
+                4825=> soc_up_cfg_read : got soc_cfg_read_event
+                4825=> test001_up_soc_cfg [PASS] cfg_read_data_expect_value=00000001, cfg_read_data_captured=00000001
+-----------------
+                5065=> soc_up_cfg_write : wbs_adr=30000000, wbs_sel=0001, wbs_wdata=00000000
+                5345=> soc_up_cfg_read : wbs_adr=30000000, wbs_sel=0001
+                5345=> soc wishbone read data result : send soc_cfg_read_event
+                5345=> soc_up_cfg_read : got soc_cfg_read_event
+                5345=> test001_up_soc_cfg [PASS] cfg_read_data_expect_value=00000000, cfg_read_data_captured=00000000
+-----------------
+                5585=> soc_up_cfg_write : wbs_adr=30000004, wbs_sel=0111, wbs_wdata=00000280
+                5865=> soc_up_cfg_read : wbs_adr=30000004, wbs_sel=0111
+                5865=> soc wishbone read data result : send soc_cfg_read_event
+                5865=> soc_up_cfg_read : got soc_cfg_read_event
+                5865=> test001_up_soc_cfg [PASS] cfg_read_data_expect_value=00000280, cfg_read_data_captured=00000280
+-----------------
+                6105=> soc_up_cfg_write : wbs_adr=30000008, wbs_sel=0111, wbs_wdata=00000168
+                6385=> soc_up_cfg_read : wbs_adr=30000008, wbs_sel=0111
+                6385=> soc wishbone read data result : send soc_cfg_read_event
+                6385=> soc_up_cfg_read : got soc_cfg_read_event
+                6385=> test001_up_soc_cfg [PASS] cfg_read_data_expect_value=00000168, cfg_read_data_captured=00000168
+-----------------
+                6625=> soc_up_cfg_write : wbs_adr=3000000c, wbs_sel=0001, wbs_wdata=00000001
+                6905=> soc_up_cfg_read : wbs_adr=3000000c, wbs_sel=0001
+                6905=> soc wishbone read data result : send soc_cfg_read_event
+                6905=> soc_up_cfg_read : got soc_cfg_read_event
+                6905=> test001_up_soc_cfg [PASS] cfg_read_data_expect_value=00000001, cfg_read_data_captured=00000001
+-----------------
+test001_up_soc_cfg: soc cfg read/write test - end
+--------------------------------------------------------------------
 =============================================================================================
 =============================================================================================
 =============================================================================================
-                2345=> Final result [PASS], check_cnt = 0000, error_cnt = 0000
+                7405=> Final result [PASS], check_cnt = 0009, error_cnt = 0000
 =============================================================================================
 =============================================================================================
 =============================================================================================
-$finish called at time : 2345 ns : File "C:/Users/soyuz/Documents/caravel-soc_fpga-lab/fsic-sim/fsic_fpga/rtl/user/testbench/tb_fsic.v" Line 454
+$finish called at time : 7405 ns : File "C:/Users/soyuz/Documents/caravel-soc_fpga-lab/fsic-sim/fsic_fpga/rtl/user/testbench/tb_fsic.v" Line 454
 ## quit
-INFO: [Common 17-206] Exiting xsim at Mon Mar 18 15:39:25 2024...
+INFO: [Common 17-206] Exiting xsim at Mon Mar 18 16:09:00 2024...
