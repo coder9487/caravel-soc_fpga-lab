@@ -2251,9 +2251,11 @@ FSIC #(
 
 
 	task test_fir;
+		fpga_cfg_write(0,1,1,0);
 		soc_abs_write(32'h3000_5000,1,2);
 		#400
 		soc_abs_read(32'h3000_5000,1);
+		fpga_cfg_write(0,3,1,0);
 		$display("Get data is %x and Golden is %x",cfg_read_data_captured,2); 
 	endtask
 
