@@ -426,8 +426,8 @@ FSIC #(
 		check_cnt = 0;
 
         fsic_system_initial();
-		//test001();	//soc cfg write/read test
-		test_fir();
+		test001();	//soc cfg write/read test
+		//test_fir();
 		/*
 		test002();	//test002_fpga_axis_req
 		test003();	//test003_fpga_to_soc_cfg_read
@@ -2251,9 +2251,7 @@ FSIC #(
 
 
 	task test_fir;
-		soc_is_cfg_write(0, 4'b0001, 8); //ioserdes rxen
-		fpga_cfg_write(0,1,1,0);
-		fpga_cc_is_enable=1;
+
 		//soc_abs_write(32'h3000_5000,1,8);
 		#400
 		soc_abs_read(32'h3000_5000,1);
