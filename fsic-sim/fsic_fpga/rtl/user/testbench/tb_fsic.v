@@ -425,7 +425,7 @@ FSIC #(
 		error_cnt = 0;
 		check_cnt = 0;
 
-        fsic_system_initial();
+        //fsic_system_initial();
 		test001();	//soc cfg write/read test
 		//test_fir();
 		/*
