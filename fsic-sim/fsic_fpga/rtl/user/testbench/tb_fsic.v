@@ -2253,6 +2253,7 @@ FSIC #(
 	task test_fir;
 		soc_abs_write(32'h3000_5000,1,1);
 		soc_abs_read(32'h3000_5000,1);
+		$display("Get data is %x and Golden is %x",cfg_read_data_captured,1); 
 	endtask
 
 endmodule
