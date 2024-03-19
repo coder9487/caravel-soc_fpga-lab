@@ -74,4 +74,9 @@ assign High_pri_req  = 1'b0;
 assign la_data_o     = 24'b0;
 
 
+
+always @(*) begin
+  rdata <= {pDATA_WIDTH{1'b1}};
+end
+
 endmodule // USER_PRJ2
