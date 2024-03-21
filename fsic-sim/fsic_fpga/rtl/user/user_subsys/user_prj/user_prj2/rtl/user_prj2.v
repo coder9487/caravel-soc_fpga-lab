@@ -58,7 +58,7 @@ assign awready       = 1'b0;
 assign arready       = 1'b0;
 assign wready        = 1'b0;
 assign rvalid        = 1'b0;
-assign rdata         = {pDATA_WIDTH{1'b0}};
+assign rdata         = 12'b1001_0100_1000;//{pDATA_WIDTH{1'b0}};
 assign ss_tready     = 1'b0;
 assign sm_tvalid     = 1'b0;
 assign sm_tdata      = {pDATA_WIDTH{1'b0}};
@@ -75,8 +75,6 @@ assign la_data_o     = 24'b0;
 
 
 
-always @(*) begin
-  rdata <= {pDATA_WIDTH{1'b1}};
-end
+
 
 endmodule // USER_PRJ2

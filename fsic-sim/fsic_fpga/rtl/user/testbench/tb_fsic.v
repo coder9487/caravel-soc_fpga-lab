@@ -425,9 +425,9 @@ FSIC #(
 		error_cnt = 0;
 		check_cnt = 0;
 
-        //fsic_system_initial();
-		test001();	//soc cfg write/read test
-		//test_fir();
+        fsic_system_initial();
+		//test001();	//soc cfg write/read test
+		test_fir();
 		/*
 		test002();	//test002_fpga_axis_req
 		test003();	//test003_fpga_to_soc_cfg_read
@@ -2197,7 +2197,7 @@ FSIC #(
 	
 	endtask
 
-
+/*
 	task soc_abs_read;
 		input [31:0] address;		//4K range
 		input [3:0] sel;
@@ -2249,14 +2249,18 @@ FSIC #(
 		end
 	endtask
 
-
+*/
 	task test_fir;
 
-		//soc_abs_write(32'h3000_5000,1,8);
-		#400
-		soc_abs_read(32'h3000_5000,1);
-		fpga_cfg_write(0,3,1,0);
-		$display("Get data is %x and Golden is %x",cfg_read_data_captured,2); 
+		cfg_read_data_expect_value = 32'ha5a5a5a5;	
+		soc_up_cfg_write(0, 4'b1111, cfg_read_data_expect_value);
+		soc_up_cfg_read(0, 4'b1111);
+		if (cfg_read_data_captured !== cfg_read_data_expect_value) begin
+			$display($time, "=> test_fir [ERROR] cfg_read_data_expect_value=%x, cfg_read_data_captured=%x", cfg_read_data_expect_value, cfg_read_data_captured);
+			error_cnt = error_cnt + 1;
+		end	
+		else
+			$display($time, "=> test_fir [PASS] cfg_read_data_expect_value=%x, cfg_read_data_captured=%x", cfg_read_data_expect_value, cfg_read_data_captured);
 	endtask
 
 endmodule

@@ -66,13 +66,14 @@ assign sm_tid        = 3'b0;
 `ifdef USER_PROJECT_SIDEBAND_SUPPORT
   assign sm_tupsb      = 5'b0;
 `endif
+*/
 assign sm_tstrb      = 4'b0;
 assign sm_tkeep      = 1'b0;
-assign sm_tlast      = 1'b0;
+//assign sm_tlast      = 1'b0;
 assign low__pri_irq  = 1'b0;
 assign High_pri_req  = 1'b0;
 assign la_data_o     = 24'b0;
-*/
+
 
 wire                     tap_WE_merge;
 wire                     tap_RE;
