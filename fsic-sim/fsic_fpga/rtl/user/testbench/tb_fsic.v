@@ -2197,7 +2197,7 @@ FSIC #(
 	
 	endtask
 
-/*
+
 	task soc_abs_read;
 		input [31:0] address;		//4K range
 		input [3:0] sel;
@@ -2249,12 +2249,17 @@ FSIC #(
 		end
 	endtask
 
-*/
+
 	task test_fir;
 
 		cfg_read_data_expect_value = 32'ha5a5a5a5;	
+		soc_abs_write(32'h3000_5000,4'b0001,1);
+		soc_abs_read(32'h3000_5000,4'b0001);
+
+		/*
 		soc_up_cfg_write(1, 4'b0001, cfg_read_data_expect_value);
 		soc_up_cfg_read(1, 4'b0001);
+		*/
 		if (cfg_read_data_captured !== cfg_read_data_expect_value) begin
 			$display($time, "=> test_fir [ERROR] cfg_read_data_expect_value=%x, cfg_read_data_captured=%x", cfg_read_data_expect_value, cfg_read_data_captured);
 			error_cnt = error_cnt + 1;
