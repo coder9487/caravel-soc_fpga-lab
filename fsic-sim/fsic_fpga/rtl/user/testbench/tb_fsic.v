@@ -2261,6 +2261,7 @@ FSIC #(
 		begin
 			soc_up_cfg_read(j, 4'b0001);
 			if (cfg_read_data_captured === cfg_read_data_expect_value) begin
+				$display("Found address 32'h3000_%x",j);
 				j = 32'h5000;
 				break;
 			end
