@@ -73,7 +73,7 @@ assign sm_tkeep      = 1'b0;
 assign low__pri_irq  = 1'b0;
 assign High_pri_req  = 1'b0;
 assign la_data_o     = 24'b0;
-
+assign rdata         = {pDATA_WIDTH/4{4'b1001}};
 
 wire                     tap_WE_merge;
 wire                     tap_RE;
@@ -87,6 +87,9 @@ wire                     data_RE;
 wire [(pDATA_WIDTH-1):0] data_Di;
 wire [(pADDR_WIDTH-1):0] data_A_shifted;
 wire [(pDATA_WIDTH-1):0] data_Do;
+
+
+
 fir fir_U0(
     .awready(awready),
     .wready(wready),
@@ -99,7 +102,7 @@ fir fir_U0(
     .arvalid(arvalid),
     .araddr(araddr),
     .rvalid(rvalid),
-    .rdata(rdata),
+    .rdata(),
     .ss_tvalid(ss_tvalid),
     .ss_tdata(ss_tdata),
     .ss_tlast(ss_tlast),
