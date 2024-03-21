@@ -2253,7 +2253,7 @@ FSIC #(
 	task test_fir;
 
 		cfg_read_data_expect_value = 32'ha5a5a5a5;	
-		soc_up_cfg_write(1, 4'b0001, 1);
+		soc_up_cfg_write(1, 4'b0001, cfg_read_data_expect_value);
 		soc_up_cfg_read(1, 4'b0001);
 		if (cfg_read_data_captured !== cfg_read_data_expect_value) begin
 			$display($time, "=> test_fir [ERROR] cfg_read_data_expect_value=%x, cfg_read_data_captured=%x", cfg_read_data_expect_value, cfg_read_data_captured);

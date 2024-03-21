@@ -73,7 +73,7 @@ assign sm_tkeep      = 1'b0;
 assign low__pri_irq  = 1'b0;
 assign High_pri_req  = 1'b0;
 assign la_data_o     = 24'b0;
-assign rdata         = {pDATA_WIDTH/4{4'b1001}};
+assign rdata         = {pDATA_WIDTH/4{4'b0111}};
 
 wire                     tap_WE_merge;
 wire                     tap_RE;
