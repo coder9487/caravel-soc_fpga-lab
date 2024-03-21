@@ -251,6 +251,8 @@ end
 	wire	wbs_ack;
 	wire	[pDATA_WIDTH-1: 0] wbs_rdata;
 
+
+	integer j;
 	//wire [7:0] Serial_Data_Out_ad_delay1;
 	//wire txclk_delay1;
 
@@ -2255,6 +2257,11 @@ FSIC #(
 		cfg_read_data_expect_value = 32'ha5a5a5a5;	
 		soc_abs_write(32'h3000_5000,4'b0001,1);
 		soc_abs_read(32'h3000_5000,4'b0001);
+		for(j =0 ;j <= 32'h5000 ;j=j+1)
+		begin
+			soc_up_cfg_read(j, 4'b0001);
+			
+		end
 
 		/*
 		soc_up_cfg_write(1, 4'b0001, cfg_read_data_expect_value);
