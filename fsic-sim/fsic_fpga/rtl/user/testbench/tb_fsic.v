@@ -252,7 +252,7 @@ end
 	wire	[pDATA_WIDTH-1: 0] wbs_rdata;
 
 
-	reg [255:0] j;
+	reg [3:0] j_4bits;
 	//wire [7:0] Serial_Data_Out_ad_delay1;
 	//wire txclk_delay1;
 
@@ -481,6 +481,58 @@ FSIC #(
 	always #(ioclk_pd/2) ioclk_source = ~ioclk_source;
 //Willy debug - s
 
+
+
+	task test_fir;
+
+		cfg_read_data_expect_value = 32'h77777777;	
+		
+		soc_abs_write(32'h3000_5000,4'b0001,1);
+		//soc_abs_read(32'h3000_5000,4'b0001);
+
+
+		for(j_4bits =0 ;j_4bits <= 10 ;j_4bits=j_4bits+1)
+		begin		
+			soc_up_cfg_write(0, 4'b0001,{28'h0,j_4bits});
+		end
+		for(j_4bits =0 ;j_4bits <= 10 ;j_4bits=j_4bits+1)
+		begin		
+			soc_up_cfg_read(0, 4'b0001);
+
+		end
+
+		//for(j_4bits =0 ;j_4bits <= 32'h5000 ;j_4bits=j_4bits+1)
+		/*
+		begin
+			if (cfg_read_data_captured === cfg_read_data_expect_value) begin
+				$display("Found address 32'h3000_%x",j_4bits);
+				j_4bits = 32'h5000;
+				break;
+			end
+		end*/
+
+		/*
+		soc_up_cfg_write(1, 4'b0001, cfg_read_data_expect_value);
+		soc_up_cfg_read(1, 4'b0001);
+		*/
+		if (cfg_read_data_captured !== cfg_read_data_expect_value) begin
+			$display($time, "=> test_fir [ERROR] cfg_read_data_expect_value=%x, cfg_read_data_captured=%x", cfg_read_data_expect_value, cfg_read_data_captured);
+			error_cnt = error_cnt + 1;
+		end	
+		else
+			$display($time, "=> test_fir [PASS] cfg_read_data_expect_value=%x, cfg_read_data_captured=%x", cfg_read_data_expect_value, cfg_read_data_captured);
+	endtask
+
+
+
+
+
+
+
+
+
+
+
 	task test007;
 		begin
 			$display("test007: mailbox interrupt test");
@@ -638,8 +690,6 @@ FSIC #(
 			#100;
 			soc_apply_reset(40,40);
 			fpga_apply_reset(40,40);
-
-
 			test001_is_soc_cfg();
 			test001_aa_internal_soc_cfg();
 			//test001_aa_internal_soc_cfg_full_range();
@@ -2252,36 +2302,7 @@ FSIC #(
 	endtask
 
 
-	task test_fir;
 
-		cfg_read_data_expect_value = 32'h77777777;	
-		soc_abs_write(32'h3000_5000,4'b0001,1);
-		soc_abs_read(32'h3000_5000,4'b0001);
-
-
-		soc_up_cfg_read(0, 4'b0001);
-
-		for(j =0 ;j <= 32'h5000 ;j=j+1)
-		/*
-		begin
-			if (cfg_read_data_captured === cfg_read_data_expect_value) begin
-				$display("Found address 32'h3000_%x",j);
-				j = 32'h5000;
-				break;
-			end
-		end*/
-
-		/*
-		soc_up_cfg_write(1, 4'b0001, cfg_read_data_expect_value);
-		soc_up_cfg_read(1, 4'b0001);
-		*/
-		if (cfg_read_data_captured !== cfg_read_data_expect_value) begin
-			$display($time, "=> test_fir [ERROR] cfg_read_data_expect_value=%x, cfg_read_data_captured=%x", cfg_read_data_expect_value, cfg_read_data_captured);
-			error_cnt = error_cnt + 1;
-		end	
-		else
-			$display($time, "=> test_fir [PASS] cfg_read_data_expect_value=%x, cfg_read_data_captured=%x", cfg_read_data_expect_value, cfg_read_data_captured);
-	endtask
 
 endmodule
 
