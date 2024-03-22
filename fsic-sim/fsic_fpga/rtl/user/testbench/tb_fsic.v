@@ -495,6 +495,12 @@ FSIC #(
 		begin		
 			soc_up_cfg_write(j_6bits, 4'b0001,{26'h0,j_6bits});	
 		end
+		
+		soc_up_cfg_write(0, 4'b0001,32'h0000_0001);	
+		// try to start fir
+
+
+
 		for(j_6bits = 20 ;j_6bits <= 40 ;j_6bits=j_6bits+2)
 		begin
 			soc_up_cfg_read(j_6bits, 4'b0001);
