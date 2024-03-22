@@ -493,8 +493,8 @@ FSIC #(
 
 		for(j_4bits = 1 ;j_4bits <= 10 ;j_4bits=j_4bits+1)
 		begin		
-			soc_up_cfg_write(0, 4'b0001,{28'h0,j_4bits});	
-			soc_up_cfg_read(0, 4'b0001);
+			soc_up_cfg_write(j_4bits, 4'b0001,{28'h0,j_4bits});	
+			soc_up_cfg_read(j_4bits, 4'b0001);
 			$display("Display data at address 32'h3000_000%x",j_4bits);
 
 
