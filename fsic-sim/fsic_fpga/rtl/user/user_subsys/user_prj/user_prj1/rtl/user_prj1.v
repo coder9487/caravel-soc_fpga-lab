@@ -73,7 +73,7 @@ assign sm_tkeep      = 1'b0;
 assign low__pri_irq  = 1'b0;
 assign High_pri_req  = 1'b0;
 assign la_data_o     = 24'b0;
-assign rdata         = 32'h87875487;
+assign rdata         = rdata;
 
 wire                     tap_WE_merge;
 wire                     tap_RE;
@@ -102,7 +102,7 @@ fir fir_U0(
     .arvalid(arvalid),
     .araddr(araddr),
     .rvalid(rvalid),
-    .rdata(),
+    .rdata(rdata),
     .ss_tvalid(ss_tvalid),
     .ss_tdata(ss_tdata),
     .ss_tlast(ss_tlast),
