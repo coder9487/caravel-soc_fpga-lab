@@ -252,7 +252,7 @@ end
 	wire	[pDATA_WIDTH-1: 0] wbs_rdata;
 
 
-	reg [3:0] j_4bits;
+	reg [5:0] j_6bits;
 	//wire [7:0] Serial_Data_Out_ad_delay1;
 	//wire txclk_delay1;
 
@@ -491,21 +491,19 @@ FSIC #(
 		//soc_abs_read(32'h3000_5000,4'b0001);
 
 
-		for(j_4bits = 2 ;j_4bits <= 11 ;j_4bits=j_4bits+1)
+		for(j_6bits = 20 ;j_6bits <= 40 ;j_6bits=j_6bits+2)
 		begin		
-			soc_up_cfg_write(j_4bits-2, 4'b0001,{28'h0,,j_4bits});	
-			soc_up_cfg_read(j_4bits-2, 4'b0001);
-			$display("Display data at address 32'h3000_000%x",j_4bits);
-
-
+			soc_up_cfg_write(j_6bits, 4'b0001,{26'h0,j_6bits});	
+			soc_up_cfg_read(j_6bits, 4'b0001);
+			$display("Display data at address %x is %x",j_6bits,cfg_read_data_captured);
 		end
 
-		//for(j_4bits =0 ;j_4bits <= 32'h5000 ;j_4bits=j_4bits+1)
+		//for(j_6bits =0 ;j_6bits <= 32'h5000 ;j_6bits=j_6bits+1)
 		/*
 		begin
 			if (cfg_read_data_captured === cfg_read_data_expect_value) begin
-				$display("Found address 32'h3000_%x",j_4bits);
-				j_4bits = 32'h5000;
+				$display("Found address 32'h3000_%x",j_6bits);
+				j_6bits = 32'h5000;
 				break;
 			end
 		end*/
