@@ -494,9 +494,15 @@ FSIC #(
 		for(j_6bits = 20 ;j_6bits <= 40 ;j_6bits=j_6bits+2)
 		begin		
 			soc_up_cfg_write(j_6bits, 4'b0001,{26'h0,j_6bits});	
+		end
+		for(j_6bits = 20 ;j_6bits <= 40 ;j_6bits=j_6bits+2)
+		begin
 			soc_up_cfg_read(j_6bits, 4'b0001);
 			$display("Display data at address %x is %x",j_6bits,cfg_read_data_captured);
+			soc_up_cfg_write(j_6bits, 4'b0001,{31'h0,1'b1});	
 		end
+
+
 
 		//for(j_6bits =0 ;j_6bits <= 32'h5000 ;j_6bits=j_6bits+1)
 		/*
