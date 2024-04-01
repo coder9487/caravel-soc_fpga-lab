@@ -405,7 +405,7 @@ FSIC #(
 
 
 	initial begin
-		repeat(1000000)
+		repeat(100000)
 		@( posedge fpga_coreclk);
 		$finish(2);
 	end	
