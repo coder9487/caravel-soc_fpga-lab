@@ -402,7 +402,12 @@ FSIC #(
 	//connect output part : io_out to mprj_io
 	assign mprj_io[TXCLK_OFFSET] = io_out[TXCLK_OFFSET];
 	assign mprj_io[TXD_OFFSET +: pSERIALIO_WIDTH] = io_out[TXD_OFFSET +: pSERIALIO_WIDTH];
-	
+
+
+	initial begin
+		repeat(1000_000)@posedge(fpga_coreclk);
+		$finish(2);
+	end	
 
 
 
