@@ -494,7 +494,7 @@ FSIC #(
 		//* Set parameter to tap 0
 		for(j_6bits = 0 ;j_6bits <= 11 ;j_6bits=j_6bits+1)
 		begin		
-			soc_up_cfg_write(8'd64+j_6bits*4, 4'b0001,{26'h0,j_6bits});	
+			soc_up_cfg_write(8'h40+j_6bits*4, 4'b0001,{26'h0,j_6bits});	
 			//* form 0x40 ~ 0x43 tap0  
 		end
 		
