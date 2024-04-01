@@ -6,3 +6,5 @@ copy C:\Users\soyuz\Documents\caravel-soc_fpga-lab\fsic-sim\fsic_fpga\rtl\user\t
 git add *.vcd
 git commit -m "Update vcxd file"
 git push 
+cls
+echo "Clear for pull"

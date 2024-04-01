@@ -521,8 +521,8 @@ FSIC #(
 
 		for(j_13bits = 0 ;j_13bits <= 10 ;j_13bits=j_13bits+1)
 		begin
-			soc_abs_write(32'h3800_0000+12'h0, 4'b0001,32'd1);	
-			soc_abs_read(32'h3800_0000+12'h0, 4'b0001);
+			//soc_abs_write(32'h300_0000+12'h0, 4'b0001,32'd1);	
+			soc_abs_read(32'h3000_0000+12'h0, 4'b0001);
 			$display("Display data at address %x is %x",j_13bits,cfg_read_data_captured);
 			//soc_up_cfg_write(j_13bits, 4'b0001,{31'h0,1'b1});	
 		end
