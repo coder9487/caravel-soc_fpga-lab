@@ -499,23 +499,23 @@ FSIC #(
 		//* Set parameter to tap 0
 		for(j_6bits = 0 ;j_6bits <= 11 ;j_6bits=j_6bits+1)
 		begin		
-			soc_up_cfg_write(8'h40+j_6bits*4, 4'b0001,{26'h0,j_6bits});	
+			soc_up_cfg_write(12'h40+j_6bits*4, 4'b0001,{26'h0,j_6bits});	
 			//* form 0x40 ~ 0x43 tap0  
 		end
 		
 
-		soc_up_cfg_write(32'h10, 4'b0001,32'd12);	
+		soc_up_cfg_write(12'h10, 4'b0001,32'd12);	
 		//* program data length
 
-		soc_up_cfg_write(32'h0, 4'b0001,32'd1);	
+		soc_up_cfg_write(12'h0, 4'b0001,32'd1);	
 		// * program ap start
 
 		for(j_6bits = 0 ;j_6bits <= 11 ;j_6bits=j_6bits+1)
 		begin
-			soc_up_cfg_write(32'h80, 4'b0001,32'd1);	
-			soc_up_cfg_read(j_6bits, 4'b0001);
-			$display("Display data at address %x is %x",j_6bits,cfg_read_data_captured);
-			soc_up_cfg_write(j_6bits, 4'b0001,{31'h0,1'b1});	
+			soc_up_cfg_write(12'h80, 4'b0001,32'd1);	
+			//soc_up_cfg_read(j_6bits, 4'b0001);
+			//$display("Display data at address %x is %x",j_6bits,cfg_read_data_captured);
+			//soc_up_cfg_write(j_6bits, 4'b0001,{31'h0,1'b1});	
 		end
 
 
