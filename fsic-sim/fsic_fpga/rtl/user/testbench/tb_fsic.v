@@ -572,9 +572,16 @@ FSIC #(
 			test007_initial();
 			
 			test007_aa_internal_soc_mb_interrupt_en();
+			$display("test007: test007_aa_internal_soc_mb_interrupt_en");
+
             test007_fpga_mail_box_write();
+			$display("test007: test007_fpga_mail_box_write");
+
             test007_soc_mb_read();
+			$display("test007: test007_soc_mb_read");
+
             test007_aa_internal_soc_mb_interrupt_status();
+			$display("test007: test007_aa_internal_soc_mb_interrupt_status");
 		end
 	endtask
 	
