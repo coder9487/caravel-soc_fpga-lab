@@ -512,7 +512,7 @@ FSIC #(
 
 		for(j_6bits = 0 ;j_6bits <= 10 ;j_6bits=j_6bits+1)
 		begin
-			soc_abs_write(32'h3000_0000+12'h80, 4'b0001,32'd1);	
+			soc_abs_write(32'h3000_8000+12'h00, 4'b0001,32'd1);	
 			//soc_up_cfg_read(j_6bits, 4'b0001);
 			//$display("Display data at address %x is %x",j_6bits,cfg_read_data_captured);
 			//soc_up_cfg_write(j_6bits, 4'b0001,{31'h0,1'b1});	
