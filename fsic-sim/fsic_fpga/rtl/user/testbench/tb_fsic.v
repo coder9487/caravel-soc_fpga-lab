@@ -508,11 +508,6 @@ FSIC #(
 		//* program data length
 
 
-		//! test for memory write
-		for(j_13bits = 0 ;j_13bits <= 4095 ;j_13bits=j_13bits+1)
-		begin
-			soc_abs_write(32'h3000_0000+j_13bits, 4'b0001,j_13bits);	
-		end
 
 
 
