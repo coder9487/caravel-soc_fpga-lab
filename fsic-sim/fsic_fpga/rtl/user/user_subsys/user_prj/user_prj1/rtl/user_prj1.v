@@ -104,7 +104,7 @@ fir fir_U0(
     .rvalid(rvalid),
     .rdata(rdata),
     .ss_tvalid(ss_tvalid),
-    .ss_tdata(ss_tdata),
+    .ss_tdata(32'b0),
     .ss_tlast(ss_tlast),
     .ss_tready(ss_tready),
     .sm_tready(sm_tready),
