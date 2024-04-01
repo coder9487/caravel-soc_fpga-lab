@@ -252,7 +252,7 @@ end
 	wire	[pDATA_WIDTH-1: 0] wbs_rdata;
 
 
-	reg [11:0] j_12bits;
+	reg [12:0] j_13bits;
 	//wire [7:0] Serial_Data_Out_ad_delay1;
 	//wire txclk_delay1;
 
@@ -497,9 +497,9 @@ FSIC #(
 
 
 		//* Set parameter to tap 0
-		for(j_12bits = 0 ;j_12bits <= 11 ;j_12bits=j_12bits+1)
+		for(j_13bits = 0 ;j_13bits <= 11 ;j_13bits=j_13bits+1)
 		begin		
-			soc_abs_write(32'h3000_0000+12'd28+j_12bits*4, 4'b0001,{26'h0,j_12bits});	
+			soc_abs_write(32'h3000_0000+12'd28+j_13bits*4, 4'b0001,{26'h0,j_13bits});	
 			//* form 0x40 ~ 0x43 tap0  
 		end
 		
@@ -509,9 +509,9 @@ FSIC #(
 
 
 		//! test for memory write
-		for(j_12bits = 0 ;j_12bits <= 4095 ;j_12bits=j_12bits+1)
+		for(j_13bits = 0 ;j_13bits <= 4095 ;j_13bits=j_13bits+1)
 		begin
-			soc_abs_write(32'h3000_0000+j_12bits, 4'b0001,j_12bits);	
+			soc_abs_write(32'h3000_0000+j_13bits, 4'b0001,j_13bits);	
 		end
 
 
@@ -524,22 +524,22 @@ FSIC #(
 
 
 
-		for(j_12bits = 0 ;j_12bits <= 10 ;j_12bits=j_12bits+1)
+		for(j_13bits = 0 ;j_13bits <= 10 ;j_13bits=j_13bits+1)
 		begin
 			soc_abs_write(32'h3800_0000+12'h0, 4'b0001,32'd1);	
 			soc_abs_read(32'h3800_0000+12'h0, 4'b0001);
-			$display("Display data at address %x is %x",j_12bits,cfg_read_data_captured);
-			//soc_up_cfg_write(j_12bits, 4'b0001,{31'h0,1'b1});	
+			$display("Display data at address %x is %x",j_13bits,cfg_read_data_captured);
+			//soc_up_cfg_write(j_13bits, 4'b0001,{31'h0,1'b1});	
 		end
 
 
 
-		//for(j_12bits =0 ;j_12bits <= 32'h5000 ;j_12bits=j_12bits+1)
+		//for(j_13bits =0 ;j_13bits <= 32'h5000 ;j_13bits=j_13bits+1)
 		/*
 		begin
 			if (cfg_read_data_captured === cfg_read_data_expect_value) begin
-				$display("Found address 32'h3000_%x",j_12bits);
-				j_12bits = 32'h5000;
+				$display("Found address 32'h3000_%x",j_13bits);
+				j_13bits = 32'h5000;
 				break;
 			end
 		end*/
