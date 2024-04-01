@@ -405,8 +405,8 @@ FSIC #(
 
 
 	initial begin
-		#1000_1000
-		$finish(2);
+		#1000_0000
+		$finish;
 	end	
 
 
