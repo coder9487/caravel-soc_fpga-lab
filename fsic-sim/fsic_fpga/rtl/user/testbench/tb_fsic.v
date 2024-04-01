@@ -507,8 +507,15 @@ FSIC #(
 		soc_abs_write(32'h3000_0000+12'h10, 4'b0001,32'd11);	
 		//* program data length
 
+		for(j_6bits = 0 ;j_6bits <= 10 ;j_6bits=j_6bits+1)
+		begin
+			soc_abs_write(32'h3000_0000+12'h80+j_6bits, 4'b0001,j_6bits);	
+		end
+
 		soc_abs_write(32'h3000_0000+12'h0, 4'b0001,32'd1);	
 		// * program ap start
+
+
 
 		for(j_6bits = 0 ;j_6bits <= 10 ;j_6bits=j_6bits+1)
 		begin
