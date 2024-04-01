@@ -1,2 +1,5 @@
 
 soc-final-project/*
+*.log
+*.wdb
+*.jou
